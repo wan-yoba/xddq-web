@@ -1,0 +1,59 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录 - 醉后不知天在水，满船清梦压星河</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>登 录</h1>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">用户名</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            autocomplete="username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">密码</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="token">令牌</label>
+          <input type="text" id="token" name="token" required />
+        </div>
+        <div class="form-group">
+          <button type="button" id="fetchServersBtn">🌏 获取服务器列表</button>
+        </div>
+        <div class="form-group">
+          <label for="servers">选择服务器</label>
+          <select id="servers" disabled>
+            <option value="">-- 选择服务器 --</option>
+          </select>
+        </div>
+        <input type="hidden" id="serverId" name="serverId" />
+        <button type="submit" id="loginBtn">🚀 登 录</button>
+      </form>
+      <div id="toast-container"></div>
+      <div id="overlay" class="overlay">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="js/common.js"></script>
+  <script type="module" src="js/login.js"></script>
+</html>

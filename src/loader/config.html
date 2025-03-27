@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>游戏配置界面 - 醉后不知天在水，满船清梦压星河</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/config.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>基础配置相关</h1>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="general">基本设置</div>
+        <div class="tab" data-tab="rules">福地规则</div>
+        <div class="tab" data-tab="switches">功能开关</div>
+        <div class="tab" data-tab="choptree">砍树设置</div>
+        <div class="tab" data-tab="talent">灵脉设置</div>
+      </div>
+
+      <div id="generalTab" class="tab-content active">
+        <div class="config-section">
+          <h3>基本设置</h3>
+          <div class="form-group">
+            <label>昵称</label>
+            <input type="text" id="nickName" placeholder="输入昵称" disabled />
+          </div>
+          <div class="form-group">
+            <label>token - 登陆界面会用到，为空即不验证</label>
+            <input type="text" id="loginToken" placeholder="登陆token验证" />
+          </div>
+          <div class="form-group">
+            <label>最大重连次数 - 设置为infinity表示无限重连</label>
+            <input
+              type="text"
+              id="maxRetries"
+              placeholder="默认为10，设置为infinity表示无限重连"
+            />
+          </div>
+          <div class="form-group">
+            <label>重连间隔 (毫秒) - 一秒 为 1000毫秒</label>
+            <input
+              type="number"
+              id="reconnectInterval"
+              placeholder="默认为300000 (5分钟)"
+            />
+          </div>
+        </div>
+
+        <div class="config-section">
+          <h3>福地设置</h3>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="homelandIgnoreTimeCheck" />
+              忽略时间检测
+            </label>
+          </div>
+        </div>
+
+        <div class="config-section">
+          <h3>妖盟商店设置</h3>
+          <div class="form-group">
+            <label>砍价人数偏移量 - 还剩多少人没砍</label>
+            <input
+              type="number"
+              id="unionBargainNum"
+              placeholder="例如妖盟58人砍价人数到达55就可以购买"
+            />
+          </div>
+          <div class="form-group">
+            <label>砍价价格偏移量 - 砍到多少以后自动购买</label>
+            <input
+              type="number"
+              id="unionBargainPrice"
+              placeholder="默认砍价到0以下购买"
+            />
+          </div>
+          <div class="form-group">
+            <label>商品购买列表</label>
+            <div id="buyUnionGoodLists" class="checkbox-group">
+              <label><input type="checkbox" value="230000011" />免费仙桃</label>
+              <label><input type="checkbox" value="230000001" />小仙桃</label>
+              <label><input type="checkbox" value="230000002" />大仙桃</label>
+              <label><input type="checkbox" value="230000003" />小灵兽果</label>
+              <label><input type="checkbox" value="230000004" />大灵兽果</label>
+              <label><input type="checkbox" value="230000005" />小净瓶水</label>
+              <label><input type="checkbox" value="230000006" />大净瓶水</label>
+              <label><input type="checkbox" value="230000007" />道书</label>
+              <label
+                ><input
+                  type="checkbox"
+                  value="230000008"
+                />传说随机精怪碎片</label
+              >
+              <label><input type="checkbox" value="230000009" />灵石</label>
+              <label
+                ><input type="checkbox" value="230000010" />传说精怪碎片</label
+              >
+              <label><input type="checkbox" value="230000012" />腾蛇信物</label>
+              <label><input type="checkbox" value="230000013" />小玄黄果</label>
+              <label><input type="checkbox" value="230000014" />大玄黄果</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="rulesTab" class="tab-content">
+        <div class="config-section">
+          <h3>普通规则</h3>
+          <div id="rulesContainer" class="rules-container">
+            <div class="rule-template">
+              <div class="rule-content">
+                <div class="form-group">
+                  <label>物品</label>
+                  <select class="item-select">
+                    <option value="100004">仙桃</option>
+                    <option value="100025">净瓶水</option>
+                    <option value="100029">琉璃珠</option>
+                    <option value="100044">天衍令</option>
+                    <option value="100047">昆仑铁</option>
+                    <option value="100003">灵石</option>
+                    <option value="100000">仙玉</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>最低品质</label>
+                  <input type="number" class="min-level" min="1" max="9" />
+                </div>
+                <div class="form-group">
+                  <label>
+                    <input type="checkbox" class="is-check" />
+                    启用检查
+                  </label>
+                </div>
+              </div>
+              <button class="delete-rule-btn" title="删除规则">×</button>
+            </div>
+          </div>
+          <button class="add-rule-btn">添加规则</button>
+        </div>
+
+        <div class="config-section">
+          <h3>虚弱时间规则</h3>
+          <div id="rulesWeakContainer" class="rules-container">
+            <!-- 与普通规则相同的模板结构 -->
+          </div>
+          <button class="add-rule-btn">添加规则</button>
+        </div>
+
+        <div class="config-section">
+          <h3>高效时间规则</h3>
+          <div id="rulesStrongContainer" class="rules-container">
+            <!-- 与普通规则相同的模板结构 -->
+          </div>
+          <button class="add-rule-btn">添加规则</button>
+        </div>
+      </div>
+
+      <div id="switchesTab" class="tab-content">
+        <div class="config-section">
+          <h3>功能开关</h3>
+          <div class="switch-grid" id="switchesContainer">
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_homeland" />
+                福地自动总开关
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_homelandGetReward" />
+                福地自动收获
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_chopTree" />
+                自动砍树
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_talent" />
+                自动灵脉
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_herorank" />
+                光速群英榜
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_herorankFightDaily" />
+                僵尸玩家每天瞎打
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_invade" />
+                异兽入侵
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_starTrial" />
+                星宿试炼
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_pupil" />
+                宗门自动训练
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_activity" />
+                自动领取活动奖励
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_wildBoss" />
+                挑战妖王
+              </label>
+            </div>
+            <div class="switch-item">
+              <label>
+                <input type="checkbox" id="switch_gatherEnergy" />
+                聚灵阵
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="config-section">
+          <h3>其他设置</h3>
+          <div class="form-group">
+            <label>挑战次数 - 冒险/真火/镇妖塔次数，0为不挑战</label>
+            <input
+              type="number"
+              id="switch_challenge"
+              placeholder="冒险/真火/镇妖塔次数，0为不挑战"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              >斗法券数量 -
+              斗法券大于一定数量的时候自动斗法,最大配置为2,表示大于2+(vipLevel*3)后自动斗法</label
+            >
+            <input
+              type="number"
+              id="switch_ticket"
+              placeholder="斗法券大于一定数量时自动斗法"
+              max="2"
+            />
+          </div>
+          <div class="form-group">
+            <label>默认分身 - 空闲闲置分身</label>
+            <select id="switch_defaultIndex">
+              <option value="0">元体</option>
+              <option value="1">阳神</option>
+              <option value="2">阴神</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>挑战分身 - 冒险/真火/镇妖塔</label>
+            <select id="switch_challengeIndex">
+              <option value="0">元体</option>
+              <option value="1">阳神</option>
+              <option value="2">阴神</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>入侵分身 - 异兽入侵</label>
+            <select id="switch_invadeIndex">
+              <option value="0">元体</option>
+              <option value="1">阳神</option>
+              <option value="2">阴神</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="chopTreeTab" class="tab-content">
+        <div class="config-section">
+          <h3>砍树设置</h3>
+          <div class="form-group">
+            <label>停止条件</label>
+            <div class="sub-form-group">
+              <label>桃子数量小于</label>
+              <input
+                type="number"
+                id="chopTree_stop_num"
+                placeholder="默认为40000"
+              />
+            </div>
+            <div class="sub-form-group">
+              <label>砍树次数</label>
+              <input
+                type="text"
+                id="chopTree_stop_doNum"
+                placeholder="默认为无穷大"
+              />
+            </div>
+            <div class="sub-form-group">
+              <label
+                >玩家等级 - 玩家等级等于该数，设置为渡劫等级，砍树停止</label
+              >
+              <input
+                type="text"
+                id="chopTree_stop_level"
+                placeholder="默认为无穷大"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="chopTree_showResult" />
+              显示砍树结果
+            </label>
+          </div>
+          <div class="form-group">
+            <h4>
+              装备分离设置 - 如果不懂请按照默认值，或参考 account.json 文件！
+            </h4>
+            <div class="sub-form-group">
+              <label>
+                <input
+                  type="checkbox"
+                  id="chopTree_separation_fightValueFirst"
+                />
+                妖力优先
+              </label>
+            </div>
+            <div class="sub-form-group">
+              <label>最低品质</label>
+              <select id="chopTree_separation_quality">
+                <option value="1">凡品</option>
+                <option value="2">下品</option>
+                <option value="3">中品</option>
+                <option value="4">上品</option>
+                <option value="5">极品</option>
+                <option value="6">仙品</option>
+                <option value="7">完美</option>
+                <option value="8">先天</option>
+                <option value="9">至宝</option>
+                <option value="10">灵宝1星</option>
+                <option value="11">灵宝2星</option>
+                <option value="12">灵宝3星</option>
+                <option value="13">灵宝4星</option>
+                <option value="14">灵宝5星</option>
+                <option value="15">真宝1星</option>
+                <option value="16">真宝2星</option>
+                <option value="17">真宝3星</option>
+                <option value="18">真宝4星</option>
+                <option value="19">真宝5星</option>
+                <option value="20">灵器1星</option>
+                <option value="21">灵器2星</option>
+                <option value="22">灵器3星</option>
+                <option value="23">灵器4星</option>
+                <option value="24">灵器5星</option>
+                <option value="25">神器1星</option>
+                <option value="26">神器2星</option>
+                <option value="27">神器3星</option>
+                <option value="28">神器4星</option>
+                <option value="29">神器5星</option>
+                <option value="30">仙器1星</option>
+                <option value="31">仙器2星</option>
+                <option value="32">仙器3星</option>
+                <option value="33">仙器4星</option>
+                <option value="34">仙器5星</option>
+                <option value="35">道器1星</option>
+                <option value="36">道器2星</option>
+                <option value="37">道器3星</option>
+                <option value="38">道器4星</option>
+                <option value="39">道器5星</option>
+                <option value="40">九天1星</option>
+                <option value="41">九天2星</option>
+                <option value="42">九天3星</option>
+                <option value="43">九天4星</option>
+                <option value="44">九天5星</option>
+                <option value="45">九天5星</option>
+                <option value="46">46级🌳</option>
+                <option value="47">47级🌳</option>
+                <option value="48">48级🌳</option>
+                <option value="49">49级🌳</option>
+                <option value="50">50级🌳</option>
+                <option value="51">51级🌳</option>
+                <option value="52">52级🌳</option>
+                <option value="53">53级🌳</option>
+                <option value="54">54级🌳</option>
+                <option value="55">55级🌳</option>
+                <option value="56">56级🌳</option>
+                <option value="57">57级🌳</option>
+                <option value="58">58级🌳</option>
+              </select>
+            </div>
+            <div class="sub-form-group">
+              <label>等级偏移量</label>
+              <input
+                type="number"
+                id="chopTree_separation_levelOffset"
+                placeholder="默认为5"
+              />
+            </div>
+            <div class="sub-form-group">
+              <label>低等级属性偏移系数</label>
+              <input
+                type="number"
+                id="chopTree_separation_probOffsetLowLv"
+                step="0.1"
+                placeholder="默认为0.3"
+              />
+            </div>
+            <div class="sub-form-group">
+              <label>概率偏移值</label>
+              <input
+                type="number"
+                id="chopTree_separation_probOffset"
+                step="0.1"
+                placeholder="默认为0.2"
+              />
+            </div>
+            <div class="sub-form-group">
+              <h4>砍树分身属性选择 - 目前仅支持单一抗性！</h4>
+              <table class="avatar-attributes">
+                <tr>
+                  <th>分身</th>
+                  <th>属性1</th>
+                  <th>属性2</th>
+                </tr>
+                <tr>
+                  <td>元体</td>
+                  <td>
+                    <select id="chopTree_separation_condition_0_0">
+                      <option value="5">击晕</option>
+                      <option value="6">暴击</option>
+                      <option value="7">连击</option>
+                      <option value="8">闪避</option>
+                      <option value="9">反击</option>
+                      <option value="10">吸血</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select id="chopTree_separation_condition_0_1">
+                      <option value="11">抗击晕</option>
+                      <option value="12">抗暴击</option>
+                      <option value="13">抗连击</option>
+                      <option value="14">抗闪避</option>
+                      <option value="15">抗反击</option>
+                      <option value="16">抗吸血</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>阳神</td>
+                  <td>
+                    <select id="chopTree_separation_condition_1_0">
+                      <option value="5">击晕</option>
+                      <option value="6">暴击</option>
+                      <option value="7">连击</option>
+                      <option value="8">闪避</option>
+                      <option value="9">反击</option>
+                      <option value="10">吸血</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select id="chopTree_separation_condition_1_1">
+                      <option value="11">抗击晕</option>
+                      <option value="12">抗暴击</option>
+                      <option value="13">抗连击</option>
+                      <option value="14">抗闪避</option>
+                      <option value="15">抗反击</option>
+                      <option value="16">抗吸血</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>阴神</td>
+                  <td>
+                    <select id="chopTree_separation_condition_2_0">
+                      <option value="5">击晕</option>
+                      <option value="6">暴击</option>
+                      <option value="7">连击</option>
+                      <option value="8">闪避</option>
+                      <option value="9">反击</option>
+                      <option value="10">吸血</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select id="chopTree_separation_condition_2_1">
+                      <option value="11">抗击晕</option>
+                      <option value="12">抗暴击</option>
+                      <option value="13">抗连击</option>
+                      <option value="14">抗闪避</option>
+                      <option value="15">抗反击</option>
+                      <option value="16">抗吸血</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="chopTree_separation_strictMode" />
+              启用装备严格模式
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div id="talentTab" class="tab-content">
+        <div class="config-section">
+          <h3>
+            灵脉设置 - 暂时不推荐使用，有问题没改完，建议直接改动 account.json
+            文件
+          </h3>
+          <div class="form-group">
+            <label>停止条件</label>
+            <div class="sub-form-group">
+              <label>先天灵草数量小于</label>
+              <input
+                type="number"
+                id="talent_stop_stopNum"
+                placeholder="默认为1"
+              />
+            </div>
+            <div class="sub-form-group">
+              <label>激发次数</label>
+              <input
+                type="text"
+                id="talent_stop_doNum"
+                placeholder="默认为无穷大"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="talent_showResult" />
+              显示灵脉结果
+            </label>
+          </div>
+          <div class="form-group">
+            <h4>灵脉分离设置</h4>
+            <div class="sub-form-group">
+              <label>最低品质</label>
+              <input
+                type="number"
+                id="talent_separation_quality"
+                min="1"
+                max="9"
+                placeholder="默认为5"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button type="button" class="save-btn" id="saveConfig">保存配置</button>
+        <button type="button" class="back-btn" id="backBtn">返回</button>
+      </div>
+      <div id="toast-container"></div>
+      <div id="overlay" class="overlay">
+        <div class="spinner"></div>
+      </div>
+    </div>
+    <script type="module" src="../js/config.js"></script>
+  </body>
+</html>

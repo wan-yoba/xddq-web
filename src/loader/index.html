@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首页- 醉后不知天在水，满船清梦压星河</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="connection-status">
+        <div class="status-indicator"></div>
+        <span class="status-text">WebSocket: </span>
+        <span id="connectionState">未连接</span>
+        <button id="manualReconnect" class="reconnect-btn">↻ 重连</button>
+      </div>
+
+      <div id="userInfo" class="user-info">
+        <div class="user-details">
+          <img src="" alt="User Avatar" />
+          <div class="user-info-text">
+            <h2 id="userName"></h2>
+            <p id="playerBelong"></p>
+            <p id="playerId"></p>
+          </div>
+          <div class="user-actions">
+            <button class="config-btn"><i class="icon-cog"></i> 配置</button>
+            <button class="start-btn"><i class="icon-play"></i> 启动</button>
+            <button class="logout-btn"><i class="icon-exit"></i> 退出</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="log-container">
+        <div class="log-header">Game Logs</div>
+        <div id="logOutput"></div>
+      </div>
+    </div>
+    <div id="toast-container"></div>
+    <div id="overlay" class="overlay">
+      <div class="spinner"></div>
+    </div>
+
+    <script type="module" src="../js/common.js"></script>
+    <script type="module" src="../js/index.js"></script>
+  </body>
+</html>
