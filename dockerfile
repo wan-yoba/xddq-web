@@ -1,17 +1,13 @@
-# 使用 Node.js 作为基础镜像
-FROM node:bullseye-slim
+FROM nginx:1.25.3-alpine
 
 # 设置工作目录
-WORKDIR /app
+WORKDIR /usr/share/nginx/html
 
-# 将当前目录下的 src 目录复制到容器内的 /app/src
-COPY ./src /app/src
+# 复制 src 目录到 nginx 静态资源目录
+COPY ./src /usr/share/nginx/html
 
-# 安装 http-server
-RUN npm install -g http-server
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-# 暴露 8083 端口
-EXPOSE 8083
+EXPOSE 80
 
-# 运行 http-server
-CMD ["http-server", "src", "-p", "8083", "--cors", "-o", "login.html"]
+CMD ["nginx", "-g", "daemon off;"]

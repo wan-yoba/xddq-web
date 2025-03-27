@@ -4,7 +4,7 @@ export default class Session {
     static checkLogin() {
         const userSession = localStorage.getItem('userSession');
         if (!userSession) {
-            window.location.href = 'login.html';
+            window.location.href = '/login.html';
             return false;
         }
         return JSON.parse(userSession);
