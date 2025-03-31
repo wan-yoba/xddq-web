@@ -2,28 +2,50 @@
 import Config from "./config.js";
 import Toast from "./toast.js";
 import Overlay from "./overlay.js";
+import Session from "./session.js";
 
 export default class Api {
   // 基础请求方法
   static async request(endpoint, options = {}) {
     const baseUrl = Config.baseUrl;
     const url = `http://${baseUrl}/api/${endpoint}`;
+    const isAuthRequired =
+      !endpoint.startsWith("servers") && !endpoint.startsWith("login");
 
     try {
       Overlay.show();
+      const headers = {
+        "Content-Type": "application/json",
+        ...options.headers,
+      };
+
+      if (isAuthRequired) {
+        const userSession = Session.getUserSession();
+        if (userSession?.jwtToken) {
+          headers.Authorization = `Bearer ${userSession.jwtToken}`;
+        }
+      }
+
       const response = await fetch(url, {
         ...options,
-        headers: {
-          "Content-Type": "application/json",
-          ...options.headers,
-        },
+        headers,
       });
 
-      if (response.status === 400) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Bad Request: ${response.status}`);
-      } else if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      switch (response.status) {
+        case 401:
+          Session.clearSession();
+          //window.location.href = '/login.html';
+          throw new Error("登录已过期，请重新登录");
+        case 400:
+          const errorData = await response.json();
+          throw new Error(
+            errorData.error || `请求参数错误: ${response.status}`
+          );
+        case 200:
+        case 201:
+          break;
+        default:
+          throw new Error(`请求失败: ${response.status}`);
       }
 
       const data = await response.json();

@@ -73,6 +73,7 @@ const loginManager = {
       playerId: data.playerId,
       wsAddress: data.wsAddress,
       token: data.token,
+      jwtToken: data.jwtToken,
       username: username,
       serverId: serverId,
       serverStart: false,

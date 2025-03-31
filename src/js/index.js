@@ -58,7 +58,7 @@ function updateUserInterface() {
 function connectWebSocket(userSession) {
   if (!userSession?.baseUrl || !userSession?.playerId) return;
   wsManager.connect(
-    `ws://${userSession.baseUrl}/ws?userId=${userSession.playerId}`
+    `ws://${userSession.baseUrl}/ws?userId=${userSession.playerId}&token=${userSession.jwtToken}`
   );
 }
 
@@ -143,10 +143,10 @@ async function startGame() {
       disableGameControls();
       toast.success("🎮 游戏启动成功");
     } else {
-      toast.error(`❌ Error: ${response?.message}`);
+      toast.error(`❌ Error: ${response?.error}`);
     }
   } catch (error) {
-    toast.error("🎮 游戏启动失败");
+    toast.error(`🎮 游戏启动失败 ！${error.message}`);
   } finally {
     overlay.hide();
   }

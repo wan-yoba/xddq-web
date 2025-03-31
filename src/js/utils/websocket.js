@@ -12,6 +12,7 @@ export default class WebSocketManager {
     this.messageHandlers = new Map();
     this.maxLogItems = 50;
     this.currentInterval = Config.reconnectInterval;
+    this.isActiveLogout = false;
   }
 
   // 连接WebSocket
@@ -86,12 +87,13 @@ export default class WebSocketManager {
 
   handleClose(event) {
     const reason = event.reason || "WebSocket连接断开";
-    if (reason !== "logout") {
+    if (!this.isActiveLogout) {
       this.appendLog("error", `连接关闭: ${reason}`);
       this.updateConnectionStatus("reconnecting");
       this.scheduleReconnect();
     } else {
       this.cleanup();
+      this.isActiveLogout = false;
     }
   }
 
@@ -178,6 +180,7 @@ export default class WebSocketManager {
   // 关闭连接
   close() {
     if (this.ws) {
+      this.isActiveLogout = true;
       this.ws.close();
       this.stopHeartbeat();
       this.updateConnectionStatus("disconnected");

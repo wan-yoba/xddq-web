@@ -253,10 +253,12 @@ const configManager = {
       }
       itemIdSet.add(itemId);
 
+      const itemSelect = element.querySelector(".item-select");
       const rule = {
         ItemId: itemId,
         minItemLv: parseInt(element.querySelector(".min-level").value) || 1,
         isCheck: element.querySelector(".is-check").checked,
+        description: itemSelect.options[itemSelect.selectedIndex].text
       };
       rules.push(rule);
     });
@@ -390,7 +392,11 @@ const configManager = {
       const minLevel = ruleElement.querySelector(".min-level");
       const isCheck = ruleElement.querySelector(".is-check");
 
-      if (itemSelect) itemSelect.value = rule.ItemId;
+      if (itemSelect) {
+        itemSelect.value = rule.ItemId;
+        // 设置description字段
+        rule.description = itemSelect.options[itemSelect.selectedIndex].text;
+      }
       if (minLevel) minLevel.value = rule.minItemLv;
       if (isCheck) isCheck.checked = rule.isCheck;
 
@@ -423,7 +429,8 @@ const configManager = {
     if (!template || !container) return;
 
     const newRule = template.cloneNode(true);
-    newRule.querySelector(".item-select").selectedIndex = 0;
+    const itemSelect = newRule.querySelector(".item-select");
+    itemSelect.selectedIndex = 0;
     newRule.querySelector(".min-level").value = "1";
     newRule.querySelector(".is-check").checked = false;
     container.appendChild(newRule);
